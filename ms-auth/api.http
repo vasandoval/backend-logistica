@@ -1,0 +1,25 @@
+### Login
+POST http://localhost:8001/login
+Content-Type: application/json
+
+{
+    "usuario": "admin",
+    "contrasena": "admin123"
+}
+
+### Login con correo
+POST http://127.0.0.1:8001/login
+Content-Type: application/json
+
+{
+    "usuario": "admin@logitrans.com",
+    "contrasena": "admin123"
+}
+
+### Logout
+POST http://127.0.0.1:8001/logout
+Authorization: TU_TOKEN_AQUI
+
+### Validar token
+GET http://127.0.0.1:8001/validar-token
+Authorization: TU_TOKEN_AQUI

@@ -7,24 +7,24 @@ use Exception;
 class AuthController {
     function login($data){
         $usuario = User::where('usuario', $data['usuario'])
-                    ->orWhere('email', $data['usuario'])
+                    ->orWhere('correo', $data['usuario'])
                     ->first();
 
-        if (empty($usuarios)){
+        if (empty($usuario)){
             throw new Exception("Usuario no encontrado", 1);
         }
 
-        if ($usuario->password !== $data['Contrasena']){
+        if ($usuario->contrasena !== $data['contrasena']){
             throw new Exception("Contraseña incorrecta", 2);
         }
 
-        if(usuario->estado === 'inactivo'){
-            throw Exception("Usuario inactivo", 3);
+        if($usuario->estado === 'inactivo'){
+            throw new Exception("Usuario inactivo", 3);
         }
 
         $token = bin2hex(random_bytes(32));//genera token aleatorio
         $usuario->token = $token;
-        $usuario->sesion_activ = true;
+        $usuario->sesion_activa = true;
         $usuario->save();
 
         return $usuario;
@@ -38,7 +38,7 @@ class AuthController {
         }
 
         $usuario->token = null;
-        $usuario->session_active = false;
+        $usuario->sesion_active = false;
         $usuario->save();
     }
 

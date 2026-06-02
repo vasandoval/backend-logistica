@@ -4,15 +4,15 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\App;
 
 return function (App $app) {
-    $app->options('/{routers:.+}', function($request,$response){
+    $app->options('/{routes:.+}', function ($request, $response) {
         return $response;
     });
 
-    $app->add(function (Request $request, RequestHandler $handler){
+    $app->add(function (Request $request, RequestHandler $handler) {
         $response = $handler->handle($request);
         return $response
             ->withHeader('Access-Control-Allow-Origin', '*')
-            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-Wth, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     });
 };

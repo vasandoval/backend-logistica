@@ -1,0 +1,34 @@
+### Listar conductores
+GET http://localhost:8002/conductores
+
+### Buscar por documento
+GET http://localhost:8002/conductores/documento/1000123456
+
+### Buscar por licencia
+GET http://localhost:8002/conductores/licencia/LIC-1001
+
+### Buscar por estado
+GET http://localhost:8002/conductores/estado/disponible
+
+### Crear conductor
+POST http://localhost:8002/conductores
+Content-Type: application/json
+
+{
+    "nombres": "Pedro",
+    "apellidos": "Gomez",
+    "documento": "1000111222",
+    "telefono": "3009876543",
+    "correo": "pedro@logitrans.com",
+    "numero_licencia": "LIC-2001",
+    "categoria_licencia": "C1",
+    "fecha_vencimiento_licencia": "2028-01-01"
+}
+
+### Cambiar estado
+PATCH http://localhost:8002/conductores/1/estado
+Content-Type: application/json
+
+{
+    "estado": "en_ruta"
+}

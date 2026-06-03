@@ -5,7 +5,7 @@ $capsule = new Capsule;
 $capsule->addConnection([
     'driver'    => 'mysql',
     'host'      => '127.0.0.1',
-    'database'  => 'ms_auth_db',
+    'database'  => 'ms_vehiculos_db',
     'username'  => 'root',
     'password'  => '',
     'charset'   => 'utf8',

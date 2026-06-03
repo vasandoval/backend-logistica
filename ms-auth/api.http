@@ -1,5 +1,5 @@
 ### Login
-POST http://localhost:8001/login
+POST http://127.0.0.1:8000/login
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Login con correo
-POST http://127.0.0.1:8001/login
+POST http://127.0.0.1:8000/login
 Content-Type: application/json
 
 {
@@ -17,9 +17,9 @@ Content-Type: application/json
 }
 
 ### Logout
-POST http://127.0.0.1:8001/logout
-Authorization: TU_TOKEN_AQUI
+POST http://127.0.0.1:8000/logout
+Authorization: a1045aa415825b543bba0ff84364e23f2ebc41e0c7f5d3f982305e9dcee14849
 
 ### Validar token
-GET http://127.0.0.1:8001/validar-token
-Authorization: TU_TOKEN_AQUI
+GET http://127.0.0.1:8000/validarToken
+Authorization: e6223465c90597c649798b40a033400a512945300b72d115485bfe68ad0e69fb

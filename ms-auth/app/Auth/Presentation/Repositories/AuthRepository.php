@@ -53,7 +53,7 @@ class AuthRepository{
     }
 
 
-    function Validar_Token(Request $request, Response $response){
+    function validarToken(Request $request, Response $response){
         try{
             $token = $request->getHeaderLine('Authorization');
 

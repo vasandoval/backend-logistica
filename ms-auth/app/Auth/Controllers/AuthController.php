@@ -38,7 +38,7 @@ class AuthController {
         }
 
         $usuario->token = null;
-        $usuario->sesion_active = false;
+        $usuario->sesion_activa = false;
         $usuario->save();
     }
 

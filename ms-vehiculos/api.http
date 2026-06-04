@@ -1,17 +1,17 @@
 ### Listar vehiculos
-GET http://127.0.0.1:8003/vehiculos
+GET http://127.0.0.1:8002/vehiculos
 
 ### Buscar por placa
-GET http://127.0.0.1:8003/vehiculos/placa/ABC123
+GET http://127.0.0.1:8002/vehiculos/placa/ABC123
 
 ### Buscar por estado
-GET http://127.0.0.1:8003/vehiculos/estado/disponible
+GET http://127.0.0.1:8002/vehiculos/estado/disponible
 
 ### Buscar por tipo
-GET http://127.0.0.1:8003/vehiculos/tipo/Camion
+GET http://127.0.0.1:8002/vehiculos/tipo/Camion
 
 ### Crear vehiculo
-POST http://127.0.0.1:8003/vehiculos
+POST http://127.0.0.1:8002/vehiculos
 Content-Type: application/json
 
 {
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ### Cambiar estado
-PATCH http://127.0.0.1:8003/vehiculos/1/estado
+PATCH http://127.0.0.1:8002/vehiculos/1/estado
 Content-Type: application/json
 
 {

@@ -1,0 +1,49 @@
+### Listar rutas
+GET http://127.0.0.1:8003/rutas
+
+### Buscar ruta por ciudad
+GET http://127.0.0.1:8003/rutas/ciudad/Bogota
+
+### Crear ruta
+POST http://127.0.0.1:8003/rutas
+Content-Type: application/json
+
+{
+    "ciudad_origen": "Cali",
+    "ciudad_destino": "Bogota",
+    "distancia": 460,
+    "tiempo_estimado": "9 horas",
+    "observaciones": "Ruta sur"
+}
+
+### Editar ruta
+PUT http://127.0.0.1:8003/rutas/1
+Content-Type: application/json
+
+{
+    "tiempo_estimado": "7 horas",
+    "observaciones": "Ruta actualizada"
+}
+
+### Listar programaciones
+GET http://127.0.0.1:8003/programaciones
+
+### Buscar por conductor
+GET http://127.0.0.1:8003/programaciones/conductor/1
+
+### Buscar por estado
+GET http://127.0.0.1:8003/programaciones/estado/retrasado
+
+### Programar viaje
+POST http://127.0.0.1:8003/programaciones
+Content-Type: application/json
+
+{
+    "conductor_id": 1,
+    "vehiculo_id": 1,
+    "ruta_id": 1,
+    "fecha_salida": "2026-06-20",
+    "hora_salida": "07:00:00",
+    "fecha_estimada_llegada": "2026-06-20",
+    "observaciones": "Carga de electrodomesticos"
+}

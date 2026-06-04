@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS ms_rutas_db;
+USE ms_rutas_db;
+
 CREATE TABLE rutas (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     ciudad_origen VARCHAR(100) NOT NULL,

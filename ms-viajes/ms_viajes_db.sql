@@ -29,6 +29,7 @@ INSERT INTO seguimientos_viajes (
     created_at,
     updated_at
 )
+
 VALUES
 (
     1,

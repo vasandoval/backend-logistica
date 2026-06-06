@@ -9,14 +9,14 @@ use Exception;
 class AuthRepository{
     function login(Request $request, Response $response){
         try{
-            $body = $request->getBody()->getContents();
-            $data = json_decode($body, true);
+            $contenido = $request->getBody()->getContents();
+            $info = json_decode($contenido, true);
 
             $controller = new AuthController();
-            $usuario = $controller->login($data);
+            $usuario = $controller->login($info);
 
             $responseBody = json_encode([
-                'message' => 'Login exitoso',
+                'message' => 'Sesión iniciada',
                 'token' => $usuario->token,
                 'usuario' => $usuario->usuario,
                 'nombre' => $usuario->nombre,

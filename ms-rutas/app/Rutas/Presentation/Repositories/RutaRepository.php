@@ -63,8 +63,8 @@ class RutaRepository {
     function listarProgramaciones(Request $request, Response $response) {
         try {
             $controlador = new RutaController();
-            $programaciones = $controlador->listarProgramaciones();
-            $response->getBody()->write(json_encode($programaciones));
+            $program = $controlador->listarProgramaciones();
+            $response->getBody()->write(json_encode($program));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
             $response->getBody()->write(json_encode(['error' => $ex->getMessage()]));
@@ -75,8 +75,8 @@ class RutaRepository {
     function buscarProgramacionPorConductor(Request $request, Response $response, $args) {
         try {
             $controlador = new RutaController();
-            $programaciones = $controlador->buscarProgramacionPorConductor($args['conductor_id']);
-            $response->getBody()->write(json_encode($programaciones));
+            $program = $controlador->buscarProgramacionPorConductor($args['conductor_id']);
+            $response->getBody()->write(json_encode($program));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
             $response->getBody()->write(json_encode(['error' => $ex->getMessage()]));
@@ -87,8 +87,8 @@ class RutaRepository {
     function buscarProgramacionPorVehiculo(Request $request, Response $response, $args) {
         try {
             $controlador = new RutaController();
-            $programaciones = $controlador->buscarProgramacionPorVehiculo($args['vehiculo_id']);
-            $response->getBody()->write(json_encode($programaciones));
+            $program = $controlador->buscarProgramacionPorVehiculo($args['vehiculo_id']);
+            $response->getBody()->write(json_encode($program));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
             $response->getBody()->write(json_encode(['error' => $ex->getMessage()]));
@@ -99,8 +99,8 @@ class RutaRepository {
     function buscarProgramacionPorEstado(Request $request, Response $response, $args) {
         try {
             $controlador = new RutaController();
-            $programaciones = $controlador->buscarProgramacionPorEstado($args['estado']);
-            $response->getBody()->write(json_encode($programaciones));
+            $program = $controlador->buscarProgramacionPorEstado($args['estado']);
+            $response->getBody()->write(json_encode($program));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
             $response->getBody()->write(json_encode(['error' => $ex->getMessage()]));
@@ -111,8 +111,8 @@ class RutaRepository {
     function buscarProgramacionPorFecha(Request $request, Response $response, $args) {
         try {
             $controlador = new RutaController();
-            $programaciones = $controlador->buscarProgramacionPorFecha($args['fecha']);
-            $response->getBody()->write(json_encode($programaciones));
+            $program = $controlador->buscarProgramacionPorFecha($args['fecha']);
+            $response->getBody()->write(json_encode($program));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
             $response->getBody()->write(json_encode(['error' => $ex->getMessage()]));

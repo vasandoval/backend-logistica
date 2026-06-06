@@ -5,16 +5,16 @@ use App\Auth\Models\User;
 use Exception;
 
 class AuthController {
-    function login($data){
-        $usuario = User::where('usuario', $data['usuario'])
-                    ->orWhere('correo', $data['usuario'])
+    function login($info){
+        $usuario = User::where('usuario', $info['usuario'])
+                    ->orWhere('correo', $info['usuario'])
                     ->first();
 
         if (empty($usuario)){
             throw new Exception("Usuario no encontrado", 1);
         }
 
-        if ($usuario->contrasena !== $data['contrasena']){
+        if ($usuario->contrasena !== $info['contrasena']){
             throw new Exception("Contraseña incorrecta", 2);
         }
 

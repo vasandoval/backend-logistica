@@ -17,36 +17,36 @@ class RutaController {
                    ->get();
     }
 
-    function crearRuta($datos) {
-        if ($datos['distancia'] <= 0)
+    function crearRuta($info) {
+        if ($info['distancia'] <= 0)
             throw new Exception("La distancia debe ser mayor a cero", 2);
 
-        $existe = Ruta::where('ciudad_origen', $datos['ciudad_origen'])
-                      ->where('ciudad_destino', $datos['ciudad_destino'])
+        $existe = Ruta::where('ciudad_origen', $info['ciudad_origen'])
+                      ->where('ciudad_destino', $info['ciudad_destino'])
                       ->first();
         if ($existe) throw new Exception("Esta ruta ya existe", 2);
 
         $ruta = new Ruta();
-        $ruta->ciudad_origen = $datos['ciudad_origen'];
-        $ruta->ciudad_destino = $datos['ciudad_destino'];
-        $ruta->distancia = $datos['distancia'];
-        $ruta->tiempo_estimado = $datos['tiempo_estimado'];
-        $ruta->observaciones = $datos['observaciones'] ?? null;
+        $ruta->ciudad_origen = $info['ciudad_origen'];
+        $ruta->ciudad_destino = $info['ciudad_destino'];
+        $ruta->distancia = $info['distancia'];
+        $ruta->tiempo_estimado = $info['tiempo_estimado'];
+        $ruta->observaciones = $info['observaciones'] ?? null;
         $ruta->save();
 
         return $ruta;
     }
 
-    function editarRuta($id, $datos) {
+    function editarRuta($id, $info) {
         $ruta = Ruta::find($id);
         if (empty($ruta)) throw new Exception("Ruta no encontrada", 1);
 
-        if (isset($datos['distancia']) && $datos['distancia'] <= 0)
+        if (isset($info['distancia']) && $info['distancia'] <= 0)
             throw new Exception("La distancia debe ser mayor a cero", 2);
 
-        if (isset($datos['distancia'])) $ruta->distancia = $datos['distancia'];
-        if (isset($datos['tiempo_estimado'])) $ruta->tiempo_estimado = $datos['tiempo_estimado'];
-        if (isset($datos['observaciones'])) $ruta->observaciones = $datos['observaciones'];
+        if (isset($info['distancia'])) $ruta->distancia = $info['distancia'];
+        if (isset($info['tiempo_estimado'])) $ruta->tiempo_estimado = $info['tiempo_estimado'];
+        if (isset($info['observaciones'])) $ruta->observaciones = $info['observaciones'];
         $ruta->save();
 
         return $ruta;
@@ -74,42 +74,42 @@ class RutaController {
         return ProgramacionViaje::where('fecha_salida', $fecha)->get();
     }
 
-    function programarViaje($datos) {
-        $conductorOcupado = ProgramacionViaje::where('conductor_id', $datos['conductor_id'])
+    function programarViaje($info) {
+        $cond_Ocupado = ProgramacionViaje::where('conductor_id', $info['conductor_id'])
                                              ->where('estado', 'programado')
                                              ->first();
-        if ($conductorOcupado) throw new Exception("El conductor no está disponible", 2);
+        if ($cond_Ocupado) throw new Exception("El conductor no está disponible", 2);
 
-        $vehiculoOcupado = ProgramacionViaje::where('vehiculo_id', $datos['vehiculo_id'])
+        $vehi_Ocupado = ProgramacionViaje::where('vehiculo_id', $info['vehiculo_id'])
                                             ->where('estado', 'programado')
                                             ->first();
-        if ($vehiculoOcupado) throw new Exception("El vehiculo no está disponible", 2);
+        if ($vehi_Ocupado) throw new Exception("El vehiculo no está disponible", 2);
 
         $programacion = new ProgramacionViaje();
-        $programacion->conductor_id = $datos['conductor_id'];
-        $programacion->vehiculo_id = $datos['vehiculo_id'];
-        $programacion->ruta_id = $datos['ruta_id'];
-        $programacion->fecha_salida = $datos['fecha_salida'];
-        $programacion->hora_salida = $datos['hora_salida'];
-        $programacion->fecha_estimada_llegada = $datos['fecha_estimada_llegada'];
-        $programacion->observaciones = $datos['observaciones'] ?? null;
+        $programacion->conductor_id = $info['conductor_id'];
+        $programacion->vehiculo_id = $info['vehiculo_id'];
+        $programacion->ruta_id = $info['ruta_id'];
+        $programacion->fecha_salida = $info['fecha_salida'];
+        $programacion->hora_salida = $info['hora_salida'];
+        $programacion->fecha_estimada_llegada = $info['fecha_estimada_llegada'];
+        $programacion->observaciones = $info['observaciones'] ?? null;
         $programacion->estado = 'programado';
         $programacion->save();
 
         return $programacion;
     }
 
-    function reprogramarViaje($id, $datos) {
+    function reprogramarViaje($id, $info) {
         $programacion = ProgramacionViaje::find($id);
         if (empty($programacion)) throw new Exception("Programacion no encontrada", 1);
         if ($programacion->estado === 'cancelado') throw new Exception("No se puede reprogramar un viaje cancelado", 2);
 
-        if (isset($datos['fecha_salida'])) $programacion->fecha_salida = $datos['fecha_salida'];
-        if (isset($datos['hora_salida'])) $programacion->hora_salida = $datos['hora_salida'];
-        if (isset($datos['fecha_estimada_llegada'])) $programacion->fecha_estimada_llegada = $datos['fecha_estimada_llegada'];
-        if (isset($datos['conductor_id'])) $programacion->conductor_id = $datos['conductor_id'];
-        if (isset($datos['vehiculo_id'])) $programacion->vehiculo_id = $datos['vehiculo_id'];
-        if (isset($datos['observaciones'])) $programacion->observaciones = $datos['observaciones'];
+        if (isset($info['fecha_salida'])) $programacion->fecha_salida = $info['fecha_salida'];
+        if (isset($info['hora_salida'])) $programacion->hora_salida = $info['hora_salida'];
+        if (isset($info['fecha_estimada_llegada'])) $programacion->fecha_estimada_llegada = $info['fecha_estimada_llegada'];
+        if (isset($info['conductor_id'])) $programacion->conductor_id = $info['conductor_id'];
+        if (isset($info['vehiculo_id'])) $programacion->vehiculo_id = $info['vehiculo_id'];
+        if (isset($info['observaciones'])) $programacion->observaciones = $info['observaciones'];
         $programacion->save();
 
         return $programacion;

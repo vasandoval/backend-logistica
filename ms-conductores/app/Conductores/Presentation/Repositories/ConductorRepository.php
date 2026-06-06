@@ -58,9 +58,9 @@ class ConductorRepository {
 
     function crear(Request $request, Response $response) {
         try {
-            $data = json_decode($request->getBody()->getContents(), true);
+            $datos = json_decode($request->getBody()->getContents(), true);
             $controller = new ConductorController();
-            $conductor = $controller->crear($data);
+            $conductor = $controller->crear($datos);
             $response->getBody()->write(json_encode(['message' => 'Conductor creado', 'conductor' => $conductor]));
             return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
@@ -72,9 +72,9 @@ class ConductorRepository {
 
     function editar(Request $request, Response $response, $args) {
         try {
-            $data = json_decode($request->getBody()->getContents(), true);
+            $datos = json_decode($request->getBody()->getContents(), true);
             $controller = new ConductorController();
-            $conductor = $controller->editar($args['id'], $data);
+            $conductor = $controller->editar($args['id'], $datos);
             $response->getBody()->write(json_encode(['message' => 'Conductor actualizado', 'conductor' => $conductor]));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
@@ -86,9 +86,9 @@ class ConductorRepository {
 
     function cambiarEstado(Request $request, Response $response, $args) {
         try {
-            $data = json_decode($request->getBody()->getContents(), true);
+            $datos = json_decode($request->getBody()->getContents(), true);
             $controller = new ConductorController();
-            $conductor = $controller->cambiarEstado($args['id'], $data['estado']);
+            $conductor = $controller->cambiarEstado($args['id'], $datos['estado']);
             $response->getBody()->write(json_encode(['message' => 'Estado actualizado', 'conductor' => $conductor]));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {

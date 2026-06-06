@@ -24,37 +24,37 @@ class VehiculoController {
         return Vehiculo::where('tipo_vehiculo', $tipo)->get();
     }
 
-    function crear($data) {
-        if (empty($data['placa'])) throw new Exception("La placa es obligatoria", 2);
-        if ($data['capacidad_carga'] <= 0) throw new Exception("La capacidad debe ser mayor a cero", 2);
+    function crear($info) {
+        if (empty($info['placa'])) throw new Exception("La placa es obligatoria", 2);
+        if ($info['capacidad_carga'] <= 0) throw new Exception("La capacidad debe ser mayor a cero", 2);
 
-        $existe = Vehiculo::where('placa', $data['placa'])->first();
+        $existe = Vehiculo::where('placa', $info['placa'])->first();
         if ($existe) throw new Exception("La placa ya está registrada", 2);
 
         $vehiculo = new Vehiculo();
-        $vehiculo->placa = $data['placa'];
-        $vehiculo->tipo_vehiculo = $data['tipo_vehiculo'];
-        $vehiculo->capacidad_carga = $data['capacidad_carga'];
-        $vehiculo->modelo = $data['modelo'];
-        $vehiculo->marca = $data['marca'];
+        $vehiculo->placa = $info['placa'];
+        $vehiculo->tipo_vehiculo = $info['tipo_vehiculo'];
+        $vehiculo->capacidad_carga = $info['capacidad_carga'];
+        $vehiculo->modelo = $info['modelo'];
+        $vehiculo->marca = $info['marca'];
         $vehiculo->estado = 'disponible';
         $vehiculo->save();
 
         return $vehiculo;
     }
 
-    function editar($id, $data) {
+    function editar($id, $info) {
         $vehiculo = Vehiculo::find($id);
         if (empty($vehiculo)) throw new Exception("Vehiculo no encontrado", 1);
 
-        if (isset($data['capacidad_carga']) && $data['capacidad_carga'] <= 0)
+        if (isset($info['capacidad_carga']) && $info['capacidad_carga'] <= 0)
             throw new Exception("La capacidad debe ser mayor a cero", 2);
 
-        if (isset($data['capacidad_carga'])) $vehiculo->capacidad_carga = $data['capacidad_carga'];
-        if (isset($data['tipo_vehiculo'])) $vehiculo->tipo_vehiculo = $data['tipo_vehiculo'];
-        if (isset($data['modelo'])) $vehiculo->modelo = $data['modelo'];
-        if (isset($data['marca'])) $vehiculo->marca = $data['marca'];
-        if (isset($data['estado'])) $vehiculo->estado = $data['estado'];
+        if (isset($info['capacidad_carga'])) $vehiculo->capacidad_carga = $info['capacidad_carga'];
+        if (isset($info['tipo_vehiculo'])) $vehiculo->tipo_vehiculo = $info['tipo_vehiculo'];
+        if (isset($info['modelo'])) $vehiculo->modelo = $info['modelo'];
+        if (isset($info['marca'])) $vehiculo->marca = $info['marca'];
+        if (isset($info['estado'])) $vehiculo->estado = $info['estado'];
         $vehiculo->save();
 
         return $vehiculo;

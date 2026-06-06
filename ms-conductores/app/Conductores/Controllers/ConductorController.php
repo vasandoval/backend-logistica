@@ -26,39 +26,39 @@ class ConductorController {
         return Conductor::where('estado', $estado)->get();
     }
 
-    function crear($data) {
-        $existe = Conductor::where('documento', $data['documento'])
-                           ->orWhere('numero_licencia', $data['numero_licencia'])
-                           ->orWhere('correo', $data['correo'])
+    function crear($info) {
+        $existe = Conductor::where('documento', $info['documento'])
+                           ->orWhere('numero_licencia', $info['numero_licencia'])
+                           ->orWhere('correo', $info['correo'])
                            ->first();
         if ($existe) throw new Exception("Documento, licencia o correo ya registrado", 2);
 
         $conductor = new Conductor();
-        $conductor->nombres = $data['nombres'];
-        $conductor->apellidos = $data['apellidos'];
-        $conductor->documento = $data['documento'];
-        $conductor->telefono = $data['telefono'];
-        $conductor->correo = $data['correo'];
-        $conductor->numero_licencia = $data['numero_licencia'];
-        $conductor->categoria_licencia = $data['categoria_licencia'];
-        $conductor->fecha_vencimiento_licencia = $data['fecha_vencimiento_licencia'];
+        $conductor->nombres = $info['nombres'];
+        $conductor->apellidos = $info['apellidos'];
+        $conductor->documento = $info['documento'];
+        $conductor->telefono = $info['telefono'];
+        $conductor->correo = $info['correo'];
+        $conductor->numero_licencia = $info['numero_licencia'];
+        $conductor->categoria_licencia = $info['categoria_licencia'];
+        $conductor->fecha_vencimiento_licencia = $info['fecha_vencimiento_licencia'];
         $conductor->estado = 'disponible';
         $conductor->save();
 
         return $conductor;
     }
 
-    function editar($id, $data) {
+    function editar($id, $info) {
         $conductor = Conductor::find($id);
         if (empty($conductor)) throw new Exception("Conductor no encontrado", 1);
 
-        if (isset($data['nombres'])) $conductor->nombres = $data['nombres'];
-        if (isset($data['apellidos'])) $conductor->apellidos = $data['apellidos'];
-        if (isset($data['telefono'])) $conductor->telefono = $data['telefono'];
-        if (isset($data['correo'])) $conductor->correo = $data['correo'];
-        if (isset($data['categoria_licencia'])) $conductor->categoria_licencia = $data['categoria_licencia'];
-        if (isset($data['fecha_vencimiento_licencia'])) $conductor->fecha_vencimiento_licencia = $data['fecha_vencimiento_licencia'];
-        if (isset($data['estado'])) $conductor->estado = $data['estado'];
+        if (isset($info['nombres'])) $conductor->nombres = $info['nombres'];
+        if (isset($info['apellidos'])) $conductor->apellidos = $info['apellidos'];
+        if (isset($info['telefono'])) $conductor->telefono = $info['telefono'];
+        if (isset($info['correo'])) $conductor->correo = $info['correo'];
+        if (isset($info['categoria_licencia'])) $conductor->categoria_licencia = $info['categoria_licencia'];
+        if (isset($info['fecha_vencimiento_licencia'])) $conductor->fecha_vencimiento_licencia = $info['fecha_vencimiento_licencia'];
+        if (isset($info['estado'])) $conductor->estado = $info['estado'];
         $conductor->save();
 
         return $conductor;

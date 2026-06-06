@@ -10,9 +10,9 @@ class ViajeRepository {
 
     function iniciarViaje(Request $request, Response $response) {
         try {
-            $datos = json_decode((string)$request->getBody(), true);
-            $ctrl = new ViajeController();
-            $seguimiento = $ctrl->iniciarViaje($datos);
+            $info = json_decode((string)$request->getBody(), true);
+            $controller = new ViajeController();
+            $seguimiento = $controller->iniciarViaje($info);
             $response->getBody()->write(json_encode(['message' => 'Viaje iniciado', 'seguimiento' => $seguimiento]));
             return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
@@ -24,9 +24,9 @@ class ViajeRepository {
 
     function actualizarEstado(Request $request, Response $response, $args) {
         try {
-            $datos = json_decode((string)$request->getBody(), true);
-            $ctrl = new ViajeController();
-            $seguimiento = $ctrl->actualizarEstado($args['id'], $datos);
+            $info = json_decode((string)$request->getBody(), true);
+            $controller = new ViajeController();
+            $seguimiento = $controller->actualizarEstado($args['id'], $info);
             $response->getBody()->write(json_encode(['message' => 'Estado actualizado', 'seguimiento' => $seguimiento]));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
@@ -38,9 +38,9 @@ class ViajeRepository {
 
     function registrarNovedad(Request $request, Response $response) {
         try {
-            $datos = json_decode((string)$request->getBody(), true);
-            $ctrl = new ViajeController();
-            $seguimiento = $ctrl->registrarNovedad($datos);
+            $info = json_decode((string)$request->getBody(), true);
+            $controller = new ViajeController();
+            $seguimiento = $controller->registrarNovedad($info);
             $response->getBody()->write(json_encode(['message' => 'Novedad registrada', 'seguimiento' => $seguimiento]));
             return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
@@ -51,9 +51,9 @@ class ViajeRepository {
 
     function finalizarViaje(Request $request, Response $response, $args) {
         try {
-            $datos = json_decode((string)$request->getBody(), true);
-            $ctrl = new ViajeController();
-            $seguimiento = $ctrl->finalizarViaje($args['id'], $datos);
+            $info = json_decode((string)$request->getBody(), true);
+            $controller = new ViajeController();
+            $seguimiento = $controller->finalizarViaje($args['id'], $info);
             $response->getBody()->write(json_encode(['message' => 'Viaje finalizado', 'seguimiento' => $seguimiento]));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
@@ -65,8 +65,8 @@ class ViajeRepository {
 
     function consultarHistorial(Request $request, Response $response, $args) {
         try {
-            $ctrl = new ViajeController();
-            $historial = $ctrl->consultarHistorial($args['programacion_id']);
+            $controller = new ViajeController();
+            $historial = $controller->consultarHistorial($args['programacion_id']);
             $response->getBody()->write(json_encode($historial));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
@@ -77,8 +77,8 @@ class ViajeRepository {
 
     function consultarPorEstado(Request $request, Response $response, $args) {
         try {
-            $ctrl = new ViajeController();
-            $seguimientos = $ctrl->consultarPorEstado($args['estado']);
+            $controller = new ViajeController();
+            $seguimientos = $controller->consultarPorEstado($args['estado']);
             $response->getBody()->write(json_encode($seguimientos));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {

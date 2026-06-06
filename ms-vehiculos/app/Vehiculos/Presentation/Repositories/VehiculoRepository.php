@@ -58,9 +58,9 @@ class VehiculoRepository {
 
     function crear(Request $request, Response $response) {
         try {
-            $data = json_decode($request->getBody()->getContents(), true);
+            $datos = json_decode($request->getBody()->getContents(), true);
             $controller = new VehiculoController();
-            $vehiculo = $controller->crear($data);
+            $vehiculo = $controller->crear($datos);
             $response->getBody()->write(json_encode(['message' => 'Vehiculo creado', 'vehiculo' => $vehiculo]));
             return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
@@ -72,9 +72,9 @@ class VehiculoRepository {
 
     function editar(Request $request, Response $response, $args) {
         try {
-            $data = json_decode($request->getBody()->getContents(), true);
+            $datos = json_decode($request->getBody()->getContents(), true);
             $controller = new VehiculoController();
-            $vehiculo = $controller->editar($args['id'], $data);
+            $vehiculo = $controller->editar($args['id'], $datos);
             $response->getBody()->write(json_encode(['message' => 'Vehiculo actualizado', 'vehiculo' => $vehiculo]));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {
@@ -86,9 +86,9 @@ class VehiculoRepository {
 
     function cambiarEstado(Request $request, Response $response, $args) {
         try {
-            $data = json_decode($request->getBody()->getContents(), true);
+            $datos = json_decode($request->getBody()->getContents(), true);
             $controller = new VehiculoController();
-            $vehiculo = $controller->cambiarEstado($args['id'], $data['estado']);
+            $vehiculo = $controller->cambiarEstado($args['id'], $datos['estado']);
             $response->getBody()->write(json_encode(['message' => 'Estado actualizado', 'vehiculo' => $vehiculo]));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (Exception $ex) {

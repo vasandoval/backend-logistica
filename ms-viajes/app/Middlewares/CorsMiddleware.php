@@ -1,14 +1,10 @@
 <?php
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
-use Slim\App;
 
-return function (App $app) {
-    $app->options('/{routes:.+}', function ($request, $response) {
-        return $response;
-    });
+return function ($app) {
+    $app->options('/{routes:.+}', fn($req, $res) => $res);
 
-    $app->add(function (Request $request, RequestHandler $handler) {
+    $app->add(function (Request $request, $handler) {
         $origin = $request->getHeaderLine('Origin') ?: '*';
         $response = $handler->handle($request);
         $response = $response
@@ -23,4 +19,5 @@ return function (App $app) {
 
         return $response;
     });
+
 };

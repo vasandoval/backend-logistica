@@ -2,9 +2,9 @@
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 return function ($app) {
-    $app->options('/{routers:.+}', fn($req,$res)=>$res);
+    $app->options('/{routes:.+}', fn($req, $res) => $res);
 
-    $app->add(function (Request $request, $handler){
+    $app->add(function (Request $request, $handler) {
         $origin = $request->getHeaderLine('Origin') ?: '*';
         $response = $handler->handle($request);
         $response = $response
@@ -19,4 +19,5 @@ return function ($app) {
 
         return $response;
     });
+
 };

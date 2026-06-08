@@ -2,7 +2,7 @@
 GET http://127.0.0.1:8001/conductores
 
 ### Buscar por documento
-GET http://127.0.0.1:8001/conductores/documento/1000111222
+GET http://127.0.0.1:8001/conductores/documento/101000123456
 
 ### Buscar por licencia
 GET http://127.0.0.1:8001/conductores/licencia/LIC-2001

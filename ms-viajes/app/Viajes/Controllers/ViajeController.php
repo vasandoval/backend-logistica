@@ -7,27 +7,22 @@ use Exception;
 class ViajeController {
 
     function iniciarViaje($info) {
-        $existe = SeguimientoViaje::where('programacion_viaje_id', $info['programacion_viaje_id'])
-                                  ->first();
-        if (empty($existe))
-            throw new Exception("No existe programacion para ese viaje", 1);
+    $cancelado = SeguimientoViaje::where('programacion_viaje_id', $info['programacion_viaje_id'])
+                                 ->where('estado', 'cancelado')
+                                 ->first();
+    if ($cancelado)
+        throw new Exception("No se puede iniciar un viaje cancelado", 2);
 
-        $cancelado = SeguimientoViaje::where('programacion_viaje_id', $info['programacion_viaje_id'])
-                                     ->where('estado', 'cancelado')
-                                     ->first();
-        if ($cancelado)
-            throw new Exception("No se puede iniciar un viaje cancelado", 2);
+    $seguimiento = new SeguimientoViaje();
+    $seguimiento->programacion_viaje_id = $info['programacion_viaje_id'];
+    $seguimiento->fecha = $info['fecha'];
+    $seguimiento->hora = $info['hora'];
+    $seguimiento->estado = 'en_transito';
+    $seguimiento->novedad = $info['novedad'] ?? null;
+    $seguimiento->save();
 
-        $seguimiento = new SeguimientoViaje();
-        $seguimiento->programacion_viaje_id = $info['programacion_viaje_id'];
-        $seguimiento->fecha = $info['fecha'];
-        $seguimiento->hora = $info['hora'];
-        $seguimiento->estado = 'en_transito';
-        $seguimiento->novedad = $info['novedad'] ?? null;
-        $seguimiento->save();
-
-        return $seguimiento;
-    }
+    return $seguimiento;
+}
 
     function actualizarEstado($id, $info) {
         $seguimiento = SeguimientoViaje::find($id);

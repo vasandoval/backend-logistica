@@ -4,6 +4,7 @@ namespace App\Viajes\Presentation\Repositories;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Viajes\Controllers\ViajeController;
+use App\Viajes\Models\SeguimientoViaje;
 use Exception;
 
 class ViajeRepository {
@@ -86,4 +87,15 @@ class ViajeRepository {
             return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
         }
     }
+
+    function consultarTodos(Request $request, Response $response) {
+    try {
+        $seguimientos = SeguimientoViaje::all();
+        $response->getBody()->write(json_encode($seguimientos));
+        return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
+    } catch (Exception $ex) {
+        $response->getBody()->write(json_encode(['error' => $ex->getMessage()]));
+        return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
+    }
+}
 }

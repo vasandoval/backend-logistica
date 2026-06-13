@@ -9,5 +9,5 @@ return function (App $app) {
     $app->get('/conductores/estado/{estado}', [ConductorRepository::class, 'buscarPorEstado']);
     $app->post('/conductores', [ConductorRepository::class, 'crear']);
     $app->put('/conductores/{id}', [ConductorRepository::class, 'editar']);
-    $app->patch('/conductores/{id}/estado', [ConductorRepository::class, 'cambiarEstado']);
+    $app->post('/conductores/{id}/estado', [ConductorRepository::class, 'cambiarEstado']);
 };

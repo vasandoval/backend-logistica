@@ -14,4 +14,3 @@ $cors($app);
 $endpoints($app);
 
 $app->run();
-

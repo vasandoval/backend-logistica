@@ -6,10 +6,10 @@ require __DIR__ . '/../app/Config/database.php';
 
 $app = AppFactory::create();
 
-$endpoints = require __DIR__ . '/../app/Conductores/Presentation/Routers/endpoints.php';
-$endpoints($app);
-
 $cors = require __DIR__ . '/../app/Middlewares/CorsMiddleware.php';
 $cors($app);
+
+$endpoints = require __DIR__ . '/../app/Conductores/Presentation/Routers/endpoints.php';
+$endpoints($app);
 
 $app->run();

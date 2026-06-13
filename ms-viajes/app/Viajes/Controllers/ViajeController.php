@@ -81,4 +81,8 @@ class ViajeController {
     function consultarPorEstado($estado) {
         return SeguimientoViaje::where('estado', $estado)->get();
     }
+
+    function consultarTodos() {
+    return SeguimientoViaje::all();
+}
 }
